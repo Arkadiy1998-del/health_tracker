@@ -1,0 +1,10 @@
+CREATE SCHEMA IF NOT EXISTS data_lake;
+
+CREATE TABLE IF NOT EXISTS data_lake.streamlit_raw_data
+(
+  date  DATE,
+  weight  NUMERIC,
+  calories  NUMERIC,
+  cycle_day  NUMERIC,
+  mood  NUMERIC
+)
