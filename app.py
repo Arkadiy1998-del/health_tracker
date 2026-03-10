@@ -7,16 +7,10 @@ from dotenv import load_dotenv
 import streamlit as st
 from datetime import datetime
 
-load_dotenv()
-
 def get_key(key):
-    try:
         return st.secrets[key]
-    except Exception:
-        return os.getenv(key)
 
 #python -m streamlit run app.py
-
 
 @st.cache_resource
 def connect():
@@ -56,4 +50,5 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
+
 
