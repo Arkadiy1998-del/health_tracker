@@ -15,16 +15,9 @@ def get_key(key):
 @st.cache_resource
 def connect():
     engine = create_engine(
-     "postgresql+psycopg2://",
-       creator = lambda : psycopg2.connect(
-    user = get_key("DB_USERNAME"),
-    password = get_key("DB_PASSWORD"),
-    host = get_key("DB_HOST"),
-    port = get_key("DB_PORT"),
-    dbname = get_key("DB_NAME")
-    ),
-    poolclass = NullPool
-)
+        f"postgresql+psycopg2://{get_key('DB_USERNAME')}:{get_key('DB_PASSWORD')}@{get_key('DB_HOST')}:{get_key('DB_PORT')}/{get_key('DB_NAME')}",
+        poolclass=NullPool
+    )
     return engine
 
 weight = st.number_input("Вес")
@@ -50,5 +43,6 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
+
 
 
