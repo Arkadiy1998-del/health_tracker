@@ -1,7 +1,7 @@
 import pandas as pd
 from sqlalchemy import create_engine
 from sqlalchemy.pool import NullPool
-import psycopg2
+import pg8000
 import os
 from dotenv import load_dotenv
 import streamlit as st
@@ -53,6 +53,7 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
+
 
 
 
