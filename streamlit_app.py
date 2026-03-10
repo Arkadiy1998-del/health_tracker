@@ -19,7 +19,7 @@ def get_key(key):
 def connect():
     engine = create_engine(
      "postgresql+pg8000://",
-       creator = lambda : psycopg2.connect(
+       creator = lambda : pg8000.connect(
     user = get_key("DB_USERNAME"),
     password = get_key("DB_PASSWORD"),
     host = get_key("DB_HOST"),
@@ -53,6 +53,7 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
+
 
 
 
