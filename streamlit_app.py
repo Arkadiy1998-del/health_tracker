@@ -18,7 +18,7 @@ def get_key(key):
 @st.cache_resource
 def connect():
     engine = create_engine(
-     "postgresql+psycopg2://",
+     "postgresql+pg8000://",
        creator = lambda : psycopg2.connect(
     user = get_key("DB_USERNAME"),
     password = get_key("DB_PASSWORD"),
@@ -54,4 +54,5 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
+
 
