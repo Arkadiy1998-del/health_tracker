@@ -26,7 +26,7 @@ images = [
    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/maxresdefault.jpg"
 ]
 
-bg_image = random.choiсe(images)
+bg_image = random.choice(images)
 
 st.markdown(
     f'<style>body{{background-image:url("{bg_image}"); background-size:cover;}}</style>',
@@ -71,3 +71,4 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
+
