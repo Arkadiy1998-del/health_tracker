@@ -30,34 +30,15 @@ bg_image = random.choice(images)
 st.markdown(
     f"""
     <style>
-    /* Фон приложения */
     .stApp {{
         background: url("{bg_image}") no-repeat center center fixed;
         background-size: cover;
-    }}
-
-    /* Полупрозрачные виджеты */
-    .stTextInput>div>div>input,
-    .stNumberInput>div>div>input,
-    .stSlider>div>div>div>div,
-    .stSelectbox>div>div>div>div,
-    .stButton>button {{
-        background-color: rgba(255, 255, 255, 0.6) !important;
-        color: black !important;
-        border-radius: 10px;
-        padding: 4px;
-    }}
-
-    /* Обёртка вокруг всех виджетов */
-    .stForm, .stApp .block-container {{
-        background: rgba(255, 255, 255, 0.2) !important;
-        border-radius: 15px;
-        padding: 15px;
     }}
     </style>
     """,
     unsafe_allow_html=True
 )
+
 @st.cache_resource
 def connect():
     engine = create_engine(
@@ -97,6 +78,7 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
+
 
 
 
