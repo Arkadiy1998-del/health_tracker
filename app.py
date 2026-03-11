@@ -20,10 +20,10 @@ def get_key(key):
 
 images = [
    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/5376x3072_1721973_%5Bwww.ArtFile.ru%5D.jpg",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/AA1M06Xa.jfif",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/avtor-naarok0fkor-kotiata-milye-boke.webp",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/ii-art-neiroset-sobaka-shchenok-mordashka-vzgliad-poza-ts-16.webp",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/maxresdefault.jpg"
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/AA1M06Xa.jfif",
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/avtor-naarok0fkor-kotiata-milye-boke.webp",
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/ii-art-neiroset-sobaka-shchenok-mordashka-vzgliad-poza-ts-16.webp",
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/maxresdefault.jpg"
 ]
 
 bg_image = random.choice(images)
@@ -71,4 +71,5 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
+
 
