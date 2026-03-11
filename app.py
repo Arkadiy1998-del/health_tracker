@@ -19,9 +19,9 @@ def get_key(key):
 #python -m streamlit run app.py
 
 images = [
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/5376x3072_1721973_[www.ArtFile.ru].jpg",
-    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/corgi-windows-theme-22-hd.jpg",
-    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/maxresdefault (1).jpg",
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/28b72de58eddd0a987087eeb5738b5c7.jpg",
+    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/343b43da25a6e1585e6c390842ef025a.jpg",
+    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/5fee67d5da2ace52cfb0bd005fb056c7.jpg",
     "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/maxresdefault.jpg"
 ]
 
@@ -78,6 +78,7 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
+
 
 
 
