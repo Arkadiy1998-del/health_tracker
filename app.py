@@ -25,8 +25,16 @@ images = [
 bg_image = random.choice(images)
 
 st.markdown(
-    f'<style>body{{background-image:url("{bg_image}"); background-size:cover;}}</style>',
-    unsafe_allow_html=True)
+    f"""
+    <style>
+    .stApp {{
+        background: url("{bg_image}") no-repeat center center fixed;
+        background-size: cover;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 @st.cache_resource
 def connect():
@@ -67,6 +75,7 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
+
 
 
 
