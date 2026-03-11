@@ -6,6 +6,7 @@ import os
 from dotenv import load_dotenv
 import streamlit as st
 from datetime import datetime
+import random
 
 load_dotenv()
 
@@ -17,6 +18,19 @@ def get_key(key):
 
 #python -m streamlit run app.py
 
+images = [
+   "https://github.com/Arkadiy1998-del/health_tracker/blob/main/Images/5376x3072_1721973_%5Bwww.ArtFile.ru%5D.jpg",
+   "https://github.com/Arkadiy1998-del/health_tracker/blob/main/Images/AA1M06Xa.jfif",
+   "https://github.com/Arkadiy1998-del/health_tracker/blob/main/Images/avtor-naarok0fkor-kotiata-milye-boke.webp",
+   "https://github.com/Arkadiy1998-del/health_tracker/blob/main/Images/ii-art-neiroset-sobaka-shchenok-mordashka-vzgliad-poza-ts-16.webp",
+   "https://github.com/Arkadiy1998-del/health_tracker/blob/main/Images/maxresdefault.jpg"
+]
+
+bg_image = random.choise(images)
+
+st.markdown(
+    f'<style>body{{background-image:url("{bg_image}"); background-size:cover;}}</style>',
+    unsafe_allow_html=True)
 
 @st.cache_resource
 def connect():
