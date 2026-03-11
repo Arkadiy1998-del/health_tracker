@@ -19,10 +19,7 @@ def get_key(key):
 #python -m streamlit run app.py
 
 images = [
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/maxresdefault.jpg",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/5376x3072_1721973_[www.ArtFile.ru].jpg",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/corgi-windows-theme-22-hd.jpg",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/maxresdefault (1).jpg"
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/maxresdefault.jpg"
 ]
 
 bg_image = random.choice(images)
@@ -70,6 +67,7 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
+
 
 
 
