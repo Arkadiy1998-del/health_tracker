@@ -25,7 +25,7 @@ data_df = pd.read_sql("SELECT * FROM data_lake.streamlit_raw_data", conn)
 fig = go.Figure()
 
 fig.add_trace(
-    go.scatter(
+    go.Scatter(
         x = data_df["date"],
         y = data_df["weight"],
         name = "Вес",
@@ -35,7 +35,7 @@ fig.add_trace(
 )
 
 fig.add_trace(
-    go.scatter(
+    go.Scatter(
         x = data_df["date"],
         y = data_df["calories"],
         name = "Калории",
@@ -45,7 +45,7 @@ fig.add_trace(
 )
 
 fig.add_trace(
-    go.scatter(
+    go.Scatter(
         x = data_df["date"],
         y = data_df["mood"],
         name = "Настроение",
@@ -64,5 +64,6 @@ fig.update_layout(
     )
                   
 )
+
 
 st.plotly_chart(fig, use_container_width=True)
