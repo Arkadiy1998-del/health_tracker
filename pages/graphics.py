@@ -6,12 +6,10 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 def get_key(key):
-    try:
-        return st.secrets[key]
-    except Exception:
-        return os.getenv(key)
+    return st.secrets[key]
 
-#python -m streamlit run graphics.py
+
+st.set_page_config(layout="wide")
 
 conn =  psycopg2.connect(
     user = get_key("DB_USERNAME"),
@@ -70,4 +68,5 @@ fig.update_layout(
 
 
 st.plotly_chart(fig, use_container_width=True)
+
 
