@@ -1,5 +1,6 @@
 import pandas as pd
 import psycopg2
+import os
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
@@ -21,6 +22,8 @@ conn =  psycopg2.connect(
     )
 
 data_df = pd.read_sql("SELECT * FROM data_lake.streamlit_raw_data", conn)
+
+data_df['date'] = pd.to_datetime(data_df['date'])
 
 fig = go.Figure()
 
@@ -67,3 +70,4 @@ fig.update_layout(
 
 
 st.plotly_chart(fig, use_container_width=True)
+
