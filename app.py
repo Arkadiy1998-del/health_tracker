@@ -45,7 +45,7 @@ f"""
 <div class="bg"></div>
 """,
 unsafe_allow
-
+)
 @st.cache_resource
 def connect():
     engine = create_engine(
