@@ -26,21 +26,29 @@ st.markdown(
 f"""
 <style>
 body {{
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-                url("{bg_image}") no-repeat center center;
-    background-size: cover;
-    background-attachment: scroll;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }}
 
-main {{
-    position: relative;
-    z-index: 1;
+.stApp {{
+  position: relative;
+}}
+
+.bg-image {{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url("{bg_image}");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
 }}
 </style>
+
+<div class="bg-image"></div>
 """,
 unsafe_allow_html=True
 )
