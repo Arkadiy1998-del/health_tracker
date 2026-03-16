@@ -10,6 +10,8 @@ import random
 
 load_dotenv()
 
+bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/IMG_20260316_114430_151.jpg"
+
 def get_key(key):
     try:
         return st.secrets[key]
@@ -58,16 +60,16 @@ daytime = None
 
 if 5 < datetime.now().hour < 15:
     daytime = 'morning'
-    print("Доброе утро!")
-if 15 < datetime.now().hour < 17:
+    st.title("Доброе утро!")
+elif 15 < datetime.now().hour < 17:
     daytime = 'afternoon'
-    print("Добрый день!")
-if 17 < datetime.now().hour < 22:
+    st.title("Добрый день!")
+elif 17 < datetime.now().hour < 22:
     daytime = 'evening'
-    print("Добрый вечер!")
+    st.title("Добрый вечер!")
 else:
     daytime = 'night'
-    print("Доброй ночи!")
+    st.title("Доброй ночи!")
 
 if daytime in ['morning','afternoon']:
     user = st.selectbox("Пользователь", ["Лена", "Вика"])
