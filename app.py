@@ -53,7 +53,7 @@ def connect():
 )
     return engine
 
-user = st.selectbox("Пользователь", ["Лена", "Вика"])
+user = st.selectbox("Пользователь", ["Не выбран", "Лена", "Вика"])
 weight = st.number_input("Вес", step = 1)
 mood = st.slider("Настроение", 0, 10)
 sleep_hours = st.number_input("Сон, часов", step = 1)
