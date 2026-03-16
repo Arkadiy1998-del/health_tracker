@@ -19,9 +19,9 @@ def get_key(key):
 
 images = [
    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/28b72de58eddd0a987087eeb5738b5c7.jpg",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/343b43da25a6e1585e6c390842ef025a.jpg",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/5fee67d5da2ace52cfb0bd005fb056c7.jpg",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/maxresdefault.jpg"
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/343b43da25a6e1585e6c390842ef025a.jpg",
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/5fee67d5da2ace52cfb0bd005fb056c7.jpg",
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/maxresdefault.jpg"
 ]
 
 bg_image = random.choice(images)
