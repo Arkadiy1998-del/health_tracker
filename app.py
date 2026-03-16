@@ -16,6 +16,7 @@ def get_key(key):
     except Exception:
         return os.getenv(key)
 
+
 images = [
    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/5376x3072_1721973_%5Bwww.ArtFile.ru%5D.jpg",
    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/AA1M06Xa.jfif",
@@ -53,23 +54,22 @@ sport_activ = st.selectbox("Физическая активность", ["Relax"
 
 if st.button("Сохранить"):
     engine = connect()
-    temp = pd.DataFrame({
-        'date' : [datetime.now()],
-        'user' : [user],
-        'weight' : [weight],
-        'mood' : [mood],
-        'sleep_hours' : [sleep_hours],
-        'sport_activ' : [sport_activ]})
-    temp.to_sql(
-        'streamlit_raw_data',
-        con = engine,
-        schema = 'data_lake',
-        if_exists = 'append',
-        index = False,
-        method = None,
-    )
-    st.write("Данные отправлены!")
+    with st.spinner("Сохраняю..."):
+        temp = pd.DataFrame({
+            'date' : [datetime.now()],
+            'weight' : [weight],
+            'mood' : [mood],
+            'sleep_hours' : [sleep_hours],
+            'sport_activ' : [sport_activ]})
+        temp.to_sql(
+            'streamlit_raw_data',
+            con = engine,
+            schema = 'data_lake',
+            if_exists = 'append',
+            index = False,
+            method = None,
+        )
+    
+    st.toast("Данные сохранены! Хорошего дня:)", icon="✅")
 
     
-
-
