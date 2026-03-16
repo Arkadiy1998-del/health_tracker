@@ -25,20 +25,26 @@ bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/mai
 st.markdown(
 f"""
 <style>
-.stApp {{
-background: linear-gradient(
-rgba(0,0,0,0.35),
-rgba(0,0,0,0.35)
-),
-url("{bg_image}");
-background-size: cover;
-background-position: center;
-background-attachment: fixed;
+.bg {{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+              url("{bg_image}");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}}
+.stApp > .main {{
+  position: relative;
+  z-index: 1;
 }}
 </style>
+<div class="bg"></div>
 """,
-unsafe_allow_html=True
-)
+unsafe_allow
 
 @st.cache_resource
 def connect():
