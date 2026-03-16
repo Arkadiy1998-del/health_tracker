@@ -16,20 +16,9 @@ def get_key(key):
     except Exception:
         return os.getenv(key)
 
-
-bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/IMG_20260316_114430_151.jpg"
-
 st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background: url("{bg_image}") no-repeat center center fixed;
-        background-size: cover;
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+    f'<style>body{{background-image:url("{bg_image}"); background-size:cover;}}</style>',
+    unsafe_allow_html=True)
 
 @st.cache_resource
 def connect():
@@ -46,31 +35,68 @@ def connect():
 )
     return engine
 
-user = st.selectbox("Пользователь", ["Лена", "Вика"])
-weight = st.number_input("Вес", step = 1)
-mood = st.slider("Настроение", 0, 10)
-sleep_hours = st.number_input("Сон, часов", step = 1)
-sport_activ = st.selectbox("Физическая активность", ["Relax", "Лёгкие нагрузки", "Тренировка", "Интенсивная тренировка"])
-
-if st.button("Сохранить"):
-    engine = connect()
-    with st.spinner("Сохраняю..."):
-        temp = pd.DataFrame({
-            'date' : [datetime.now()],
-            'user' : [user],
-            'weight' : [weight],
-            'mood' : [mood],
-            'sleep_hours' : [sleep_hours],
-            'sport_activ' : [sport_activ]})
-        temp.to_sql(
-            'streamlit_raw_data',
+def save(data, param):
+    if param == 'm':
+        data.to_sql(
+            'streamlit_raw_data_M',
             con = engine,
             schema = 'data_lake',
             if_exists = 'append',
             index = False,
             method = None,
         )
-    
+    if param == 'e':
+        data.to_sql(
+            'streamlit_raw_data_E',
+            con = engine,
+            schema = 'data_lake',
+            if_exists = 'append',
+            index = False,
+            method = None,
+        )
+daytime = None
+
+if 5 < datetime.now().hour < 15:
+    daytime = 'morning'
+    print("Доброе утро!")
+if 15 < datetime.now().hour < 17:
+    daytime = 'afternoon'
+    print("Добрый день!")
+if 17 < datetime.now().hour < 22:
+    daytime = 'evening'
+    print("Добрый вечер!")
+else:
+    daytime = 'night'
+    print("Доброй ночи!")
+
+if daytime in ['morning','afternoon']:
+    user = st.selectbox("Пользователь", ["Лена", "Вика"])
+    weight = st.number_input("Вес", step = 1)
+    sleep_hours = st.number_input("Сон, часов", step = 1)
+else:
+    user = st.selectbox("Пользователь", ["Лена", "Вика"])
+    mood = st.slider("Настроение", 0, 10)
+    sport_activ = st.selectbox("Физическая активность за день", ["Relax", "Лёгкие нагрузки", "Тренировка", "Интенсивная тренировка"])
+
+if st.button("Сохранить"):
+    engine = connect()
+    with st.spinner("Сохраняю..."):
+        if daytime in ['morning','afternoon']:
+            temp = pd.DataFrame({
+                'date' : [datetime.now()],
+                'user' : [user],
+                'weight' : [weight],
+                'sleep_hours' : [sleep_hours]
+            })
+            save(temp, 'm')
+        else:
+            temp = pd.DataFrame({
+                'date' : [datetime.now()],
+                'user' : [user],
+                'mood' : [mood],
+                'sport_activ' : [sport_activ]})
+            save(temp, 'e')
+        
     st.toast("Данные сохранены! Хорошего дня:)", icon="✅")
 
     
