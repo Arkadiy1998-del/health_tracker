@@ -105,7 +105,7 @@ if st.button("Сохранить"):
         if daytime in ['morning','afternoon']:
             temp = pd.DataFrame({
                 'date' : [datetime.now()],
-                'user' : [usermap[user]],
+                'user_id' : [usermap[user]],
                 'weight' : [weight],
                 'sleep_hours' : [sleep_hours]
             })
@@ -113,7 +113,7 @@ if st.button("Сохранить"):
         else:
             temp = pd.DataFrame({
                 'date' : [datetime.now()],
-                'user' : [user],
+                'user_id' : [usermap[user]],
                 'mood' : [mood],
                 'sport_activ' : [sport_activ]})
             save(temp, 'e')
