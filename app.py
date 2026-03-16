@@ -17,26 +17,19 @@ def get_key(key):
         return os.getenv(key)
 
 
-images = [
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/28b72de58eddd0a987087eeb5738b5c7.jpg",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/343b43da25a6e1585e6c390842ef025a.jpg",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/5fee67d5da2ace52cfb0bd005fb056c7.jpg",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/maxresdefault.jpg"
-]
+bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/IMG_20260316_114430_151.jpg"
 
-bg_image = random.choice(images)
-
-#st.markdown(
-#    f"""
-#    <style>
-#    .stApp {{
-#        background: url("{bg_image}") no-repeat center center fixed;
-#        background-size: cover;
-#    }}
-#    </style>
-#    """,
-#    unsafe_allow_html=True
-#)
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background: url("{bg_image}") no-repeat center center fixed;
+        background-size: cover;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 @st.cache_resource
 def connect():
