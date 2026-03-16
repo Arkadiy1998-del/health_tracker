@@ -117,7 +117,6 @@ if st.button("Сохранить"):
                 'mood' : [mood],
                 'sport_activ' : [sport_activ]})
             save(temp, 'e')
-    st.session_state    
     st.toast("Данные сохранены! Хорошего дня:)", icon="✅")
 
     
