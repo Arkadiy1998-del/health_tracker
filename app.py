@@ -26,17 +26,17 @@ images = [
 
 bg_image = random.choice(images)
 
-st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background: url("{bg_image}") no-repeat center center fixed;
-        background-size: cover;
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+#st.markdown(
+#    f"""
+#    <style>
+#    .stApp {{
+#        background: url("{bg_image}") no-repeat center center fixed;
+#        background-size: cover;
+#    }}
+#    </style>
+#    """,
+#    unsafe_allow_html=True
+#)
 
 @st.cache_resource
 def connect():
