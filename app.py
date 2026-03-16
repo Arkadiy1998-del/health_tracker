@@ -44,8 +44,9 @@ f"""
 </style>
 <div class="bg"></div>
 """,
-unsafe_allow
+unsafe_allow_html=True
 )
+
 @st.cache_resource
 def connect():
     engine = create_engine(
