@@ -53,7 +53,7 @@ def connect():
 )
     return engine
 
-user = st.selectbox("Пользователь", ["Не выбран", "Лена", "Вика"])
+user = st.selectbox("Пользователь", ["Лена", "Вика"])
 weight = st.number_input("Вес", step = 1)
 mood = st.slider("Настроение", 0, 10)
 sleep_hours = st.number_input("Сон, часов", step = 1)
@@ -64,6 +64,7 @@ if st.button("Сохранить"):
     with st.spinner("Сохраняю..."):
         temp = pd.DataFrame({
             'date' : [datetime.now()],
+            'user' : [user],
             'weight' : [weight],
             'mood' : [mood],
             'sleep_hours' : [sleep_hours],
