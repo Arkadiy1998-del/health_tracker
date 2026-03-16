@@ -16,28 +16,21 @@ def get_key(key):
     except Exception:
         return os.getenv(key)
 
-#python -m streamlit run app.py
+#python -m streamlit run graphics.py
 
 images = [
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/28b72de58eddd0a987087eeb5738b5c7.jpg",
-    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/343b43da25a6e1585e6c390842ef025a.jpg",
-    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/5fee67d5da2ace52cfb0bd005fb056c7.jpg",
-    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/maxresdefault.jpg"
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/5376x3072_1721973_%5Bwww.ArtFile.ru%5D.jpg",
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/AA1M06Xa.jfif",
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/avtor-naarok0fkor-kotiata-milye-boke.webp",
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/ii-art-neiroset-sobaka-shchenok-mordashka-vzgliad-poza-ts-16.webp",
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/maxresdefault.jpg"
 ]
 
 bg_image = random.choice(images)
 
 st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background: url("{bg_image}") no-repeat center center fixed;
-        background-size: cover;
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+    f'<style>body{{background-image:url("{bg_image}"); background-size:cover;}}</style>',
+    unsafe_allow_html=True)
 
 @st.cache_resource
 def connect():
@@ -54,19 +47,20 @@ def connect():
 )
     return engine
 
-engine = connect()
-
+user = st.selectbox("Пользователь", ["Лена", "Вика"])
 weight = st.number_input("Вес")
-calories = st.number_input("Калории")
-cycle_day = st.selectbox("День цикла", [1, 2, 3, 4, 5])
 mood = st.slider("Настроение", 0, 10)
+sleep_hours = st.number_input("Сон, часов")
+sport_activ = st.selectbox("Физическая активность", ["Relax", "Лёгкие нагрузки", "Тренировка", "Интенсивная тренировка"])
+
 if st.button("Сохранить"):
+    engine = connect()
     temp = pd.DataFrame({
         'date' : [datetime.now()],
         'weight' : [weight],
-        'calories' : [calories], 
-        'cycle_day' : [cycle_day], 
-        'mood' : [mood]})
+        'mood' : [mood],
+        'sleep_hours' : [sleep_hours],
+        'sport_activ' : [sport_activ]})
     temp.to_sql(
         'streamlit_raw_data',
         con = engine,
@@ -78,11 +72,3 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
-
-
-
-
-
-
-
-
