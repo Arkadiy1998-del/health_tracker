@@ -18,10 +18,9 @@ def get_key(key):
 
 
 images = [
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/5376x3072_1721973_%5Bwww.ArtFile.ru%5D.jpg",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/AA1M06Xa.jfif",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/avtor-naarok0fkor-kotiata-milye-boke.webp",
-   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/ii-art-neiroset-sobaka-shchenok-mordashka-vzgliad-poza-ts-16.webp",
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/28b72de58eddd0a987087eeb5738b5c7.jpg",
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/343b43da25a6e1585e6c390842ef025a.jpg",
+   "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/5fee67d5da2ace52cfb0bd005fb056c7.jpg",
    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/maxresdefault.jpg"
 ]
 
