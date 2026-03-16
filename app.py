@@ -25,24 +25,22 @@ bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/mai
 st.markdown(
 f"""
 <style>
-.bg {{
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
-              url("{bg_image}");
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
+body {{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+                url("{bg_image}") no-repeat center center;
+    background-size: cover;
+    background-attachment: scroll;
 }}
-.stApp > .main {{
-  position: relative;
-  z-index: 1;
+
+main {{
+    position: relative;
+    z-index: 1;
 }}
 </style>
-<div class="bg"></div>
 """,
 unsafe_allow_html=True
 )
