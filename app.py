@@ -22,36 +22,7 @@ usermap = {"Лена" : 1, "Вика" : 2}
 
 bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/IMG_20260316_114430_151.jpg"
 
-st.markdown(
-f"""
-<style>
-body {{
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}}
-
-.stApp {{
-  position: relative;
-}}
-
-.bg-image {{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-image: url("{bg_image}");
-  background-size: cover;
-  background-position: center;
-  z-index: -1;
-}}
-</style>
-
-<div class="bg-image"></div>
-""",
-unsafe_allow_html=True
-)
+st.markdown( f'<style>body{{background-image:url("{bg_image}"); background-size:cover;}}</style>', unsafe_allow_html=True)
 
 @st.cache_resource
 def connect():
