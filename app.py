@@ -10,13 +10,15 @@ import random
 
 load_dotenv()
 
-bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/IMG_20260316_114430_151.jpg"
-
 def get_key(key):
     try:
         return st.secrets[key]
     except Exception:
         return os.getenv(key)
+
+usermap = {"Лена" : 1, "Вика" : 2}
+
+bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/IMG_20260316_114430_151.jpg"
 
 st.markdown(
     f'<style>body{{background-image:url("{bg_image}"); background-size:cover;}}</style>',
@@ -57,14 +59,15 @@ def save(data, param):
             method = None,
         )
 daytime = None
+hour = datetime.now().hour
 
-if 5 < datetime.now().hour < 15:
+if 5 < hour <= 12:
     daytime = 'morning'
     st.title("Доброе утро!")
-elif 15 < datetime.now().hour < 17:
+elif 12 < hour <= 17:
     daytime = 'afternoon'
     st.title("Добрый день!")
-elif 17 < datetime.now().hour < 22:
+elif 17 < hour <= 22:
     daytime = 'evening'
     st.title("Добрый вечер!")
 else:
@@ -86,7 +89,7 @@ if st.button("Сохранить"):
         if daytime in ['morning','afternoon']:
             temp = pd.DataFrame({
                 'date' : [datetime.now()],
-                'user' : [user],
+                'user' : [usermap[user]],
                 'weight' : [weight],
                 'sleep_hours' : [sleep_hours]
             })
@@ -98,7 +101,7 @@ if st.button("Сохранить"):
                 'mood' : [mood],
                 'sport_activ' : [sport_activ]})
             save(temp, 'e')
-        
+    st.session_state    
     st.toast("Данные сохранены! Хорошего дня:)", icon="✅")
 
     
