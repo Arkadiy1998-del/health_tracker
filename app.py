@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 import streamlit as st
 from datetime import datetime
 import random
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 load_dotenv()
 
@@ -73,7 +75,7 @@ def save(data, param):
             method = None,
         )
 daytime = None
-hour = datetime.now().hour
+hour = datetime.now(ZoneInfo("Europe/Moscow")).hour
 
 if 5 < hour <= 12:
     daytime = 'morning'
