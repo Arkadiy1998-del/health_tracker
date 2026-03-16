@@ -58,7 +58,7 @@ def connect():
 def save(data, param):
     if param == 'm':
         data.to_sql(
-            'streamlit_raw_data_M',
+            'streamlit_raw_data_m',
             con = engine,
             schema = 'data_lake',
             if_exists = 'append',
@@ -67,7 +67,7 @@ def save(data, param):
         )
     if param == 'e':
         data.to_sql(
-            'streamlit_raw_data_E',
+            'streamlit_raw_data_e',
             con = engine,
             schema = 'data_lake',
             if_exists = 'append',
