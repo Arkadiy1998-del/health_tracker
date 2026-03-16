@@ -1,10 +1,17 @@
 CREATE SCHEMA IF NOT EXISTS data_lake;
 
-CREATE TABLE IF NOT EXISTS data_lake.streamlit_raw_data
+CREATE TABLE IF NOT EXISTS data_lake.streamlit_raw_data_M
 (
   date  DATE,
+  user TEXT,
   weight  NUMERIC,
-  calories  NUMERIC,
-  cycle_day  NUMERIC,
-  mood  NUMERIC
+  sleep_hours NUMERIC
+);
+
+CREATE TABLE IF NOT EXISTS data_lake.streamlit_raw_data_E
+(
+  date DATE,
+  user TEXT,
+  mood NUMERIC,
+  sport_activ TEXT
 )
