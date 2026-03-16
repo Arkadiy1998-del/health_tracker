@@ -16,8 +16,6 @@ def get_key(key):
     except Exception:
         return os.getenv(key)
 
-#python -m streamlit run graphics.py
-
 images = [
    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/5376x3072_1721973_%5Bwww.ArtFile.ru%5D.jpg",
    "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/Images/AA1M06Xa.jfif",
@@ -48,9 +46,9 @@ def connect():
     return engine
 
 user = st.selectbox("Пользователь", ["Лена", "Вика"])
-weight = st.number_input("Вес")
+weight = st.number_input("Вес", format = "%d")
 mood = st.slider("Настроение", 0, 10)
-sleep_hours = st.number_input("Сон, часов")
+sleep_hours = st.number_input("Сон, часов", format = "%d")
 sport_activ = st.selectbox("Физическая активность", ["Relax", "Лёгкие нагрузки", "Тренировка", "Интенсивная тренировка"])
 
 if st.button("Сохранить"):
