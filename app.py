@@ -46,9 +46,9 @@ def connect():
     return engine
 
 user = st.selectbox("Пользователь", ["Лена", "Вика"])
-weight = st.number_input("Вес", format = "%d")
+weight = st.number_input("Вес", step = 1)
 mood = st.slider("Настроение", 0, 10)
-sleep_hours = st.number_input("Сон, часов", format = "%d")
+sleep_hours = st.number_input("Сон, часов", step = 1)
 sport_activ = st.selectbox("Физическая активность", ["Relax", "Лёгкие нагрузки", "Тренировка", "Интенсивная тренировка"])
 
 if st.button("Сохранить"):
@@ -70,3 +70,4 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
+
