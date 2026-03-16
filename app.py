@@ -55,6 +55,7 @@ if st.button("Сохранить"):
     engine = connect()
     temp = pd.DataFrame({
         'date' : [datetime.now()],
+        'user' : [user],
         'weight' : [weight],
         'mood' : [mood],
         'sleep_hours' : [sleep_hours],
@@ -70,4 +71,5 @@ if st.button("Сохранить"):
     st.write("Данные отправлены!")
 
     
+
 
