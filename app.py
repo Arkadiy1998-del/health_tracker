@@ -7,8 +7,6 @@ from dotenv import load_dotenv
 import streamlit as st
 from datetime import datetime
 import random
-from datetime import datetime
-from zoneinfo import ZoneInfo
 
 load_dotenv()
 
@@ -20,25 +18,11 @@ def get_key(key):
 
 usermap = {"Лена" : 1, "Вика" : 2}
 
-bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/IMG_20260316_114430_151.jpg"
+#python -m streamlit run app.py
 
-st.markdown(
-f"""
-<style>
-.stApp {{
-background: linear-gradient(
-rgba(0,0,0,0.35),
-rgba(0,0,0,0.35)
-),
-url("{bg_image}");
-background-size: cover;
-background-position: center;
-background-attachment: fixed;
-}}
-</style>
-""",
-unsafe_allow_html=True
-)
+#st.markdown(
+#    f'<style>body{{background-image:url("{bg_image}"); background-size:cover;}}</style>',
+#    unsafe_allow_html=True)
 
 @st.cache_resource
 def connect():
@@ -58,7 +42,7 @@ def connect():
 def save(data, param):
     if param == 'm':
         data.to_sql(
-            'streamlit_raw_data_m',
+            'streamlit_raw_data_M',
             con = engine,
             schema = 'data_lake',
             if_exists = 'append',
@@ -67,7 +51,7 @@ def save(data, param):
         )
     if param == 'e':
         data.to_sql(
-            'streamlit_raw_data_e',
+            'streamlit_raw_data_E',
             con = engine,
             schema = 'data_lake',
             if_exists = 'append',
@@ -75,7 +59,7 @@ def save(data, param):
             method = None,
         )
 daytime = None
-hour = datetime.now(ZoneInfo("Europe/Moscow")).hour
+hour = datetime.now().hour
 
 if 5 < hour <= 12:
     daytime = 'morning'
@@ -91,10 +75,12 @@ else:
     st.title("Доброй ночи!")
 
 if daytime in ['morning','afternoon']:
+    date = st.date_input("Выбрать дату...")
     user = st.selectbox("Пользователь", ["Лена", "Вика"])
     weight = st.number_input("Вес", step = 1)
     sleep_hours = st.number_input("Сон, часов", step = 1)
 else:
+    date = st.date_input("Выбрать дату...")
     user = st.selectbox("Пользователь", ["Лена", "Вика"])
     mood = st.slider("Настроение", 0, 10)
     sport_activ = st.selectbox("Физическая активность за день", ["Relax", "Лёгкие нагрузки", "Тренировка", "Интенсивная тренировка"])
@@ -104,19 +90,21 @@ if st.button("Сохранить"):
     with st.spinner("Сохраняю..."):
         if daytime in ['morning','afternoon']:
             temp = pd.DataFrame({
-                'date' : [datetime.now()],
-                'user_id' : [usermap[user]],
+                'date' : [date],
+                'user' : [usermap[user]],
                 'weight' : [weight],
                 'sleep_hours' : [sleep_hours]
             })
             save(temp, 'm')
         else:
             temp = pd.DataFrame({
-                'date' : [datetime.now()],
-                'user_id' : [usermap[user]],
+                'date' : [date],
+                'user' : [usermap[user]],
                 'mood' : [mood],
-                'sport_activ' : [sport_activ]})
+                'sport_activ' : [sport_activ]
+            })
             save(temp, 'e')
+    st.session_state    
     st.toast("Данные сохранены! Хорошего дня:)", icon="✅")
 
     
