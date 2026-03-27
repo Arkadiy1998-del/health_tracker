@@ -18,11 +18,9 @@ def get_key(key):
 
 usermap = {"Лена" : 1, "Вика" : 2}
 
-#python -m streamlit run app.py
-
-#st.markdown(
-#    f'<style>body{{background-image:url("{bg_image}"); background-size:cover;}}</style>',
-#    unsafe_allow_html=True)
+st.markdown(
+    f'<style>body{{background-image:url("{bg_image}"); background-size:cover;}}</style>',
+    unsafe_allow_html=True)
 
 @st.cache_resource
 def connect():
