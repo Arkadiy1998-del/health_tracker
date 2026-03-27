@@ -85,12 +85,12 @@ else:
     st.title("Доброй ночи!")
 
 if daytime in ['morning','afternoon']:
-    date = st.date_input("Выбрать дату...")
+    date = st.date_input("Выбрать дату...", max_value=today)
     user = st.selectbox("Пользователь", ["Лена", "Вика"])
     weight = st.number_input("Вес", step = 1)
     sleep_hours = st.number_input("Сон, часов", step = 1)
 else:
-    date = st.date_input("Выбрать дату...")
+    date = st.date_input("Выбрать дату...", max_value=today)
     user = st.selectbox("Пользователь", ["Лена", "Вика"])
     mood = st.slider("Настроение", 0, 10)
     sport_activ = st.selectbox("Физическая активность за день", ["Relax", "Лёгкие нагрузки", "Тренировка", "Интенсивная тренировка"])
