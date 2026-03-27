@@ -18,6 +18,8 @@ def get_key(key):
 
 usermap = {"Лена" : 1, "Вика" : 2}
 
+bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/IMG_20260316_114430_151.jpg"
+
 st.markdown(
     f'<style>body{{background-image:url("{bg_image}"); background-size:cover;}}</style>',
     unsafe_allow_html=True)
