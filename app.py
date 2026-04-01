@@ -23,19 +23,19 @@ usermap = {"Лена" : 1, "Вика" : 2}
 bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/IMG_20260316_114430_151.jpg"
 
 # дизайн
-st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background-image: url("{bg_image}");
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+#st.markdown(
+#    f"""
+#    <style>
+#    .stApp {{
+#        background-image: url("{bg_image}");
+#        background-size: cover;
+#        background-attachment: fixed;
+#        background-position: center;
+#    }}
+#    </style>
+#    """,
+#    unsafe_allow_html=True
+#)
 
 st.set_page_config(layout="wide")
 
