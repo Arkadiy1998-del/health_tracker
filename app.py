@@ -23,21 +23,20 @@ usermap = {"Лена" : 1, "Вика" : 2}
 bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/IMG_20260316_114430_151.jpg"
 
 # дизайн
-#st.markdown(
-#    f"""
-#    <style>
-#    .stApp {{
-#        background-image: url("{bg_image}");
-#        background-size: cover;
-#        background-attachment: fixed;
-#        background-position: center;
-#    }}
-#    </style>
-#    """,
-#    unsafe_allow_html=True
-#)
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url("{bg_image}");
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-st.set_page_config(page_title="Главная", layout="wide")
 
 # Задаём функцию для создания словарей по метрикам
 def create_dict(metric_name, saving, metric):
@@ -101,7 +100,7 @@ def change(metric):
 weight = {"name" : "weight", 
           "widget" : st.number_input, 
           "args" : {"label" : "Вес", "step" : 1, "on_change" : change, 
-                    "args" : ("weight",)}}                                        
+                    "args" : ("weight",)}}                                        # Добавляем запятую в args, потому что нужен кортеж
 sleep_hours = {"name" : "sleep_hours", 
                "widget" : st.number_input, 
                "args" : {"label" : "Сон, часов", "step" : 1, "on_change" : change, 
@@ -132,26 +131,49 @@ else:
     daytime = 'night'
     st.title("Доброй ночи!")
 
-con = connect()
+col1, col2 = st.columns(2)
 
-date = st.date_input("Выбор даты...", value = today, max_value=today)
-user = st.selectbox("Пользователь", ["Лена", "Вика"])
+if "page" not in st.session_state: st.session_state.page = None
 
-if "saving_dict" not in st.session_state: st.session_state.saving_dict = {}
+if st.session_state.page == None:
+    with col1:
+        if st.button("Внести данные"):
+            st.session_state.page = "metrics"
+        
+    with col2:
+        if st.button("Помощь"):
+            st.session_state.page = "help"       
+        
+    if st.session_state.page == "metrics":   
+        con = connect()
+        date = st.date_input("Выбор даты...", value = today, max_value=today)
+        user = st.selectbox("Пользователь", ["Лена", "Вика"])
 
-for m in metrics:
-    value = m["widget"](**m["args"]) 
-    if st.session_state.get(f'{m["name"]}_flag'):
-        if "saving" not in st.session_state: st.session_state.saving = None
-        if already_exists(con, m["name"], date, usermap[user]):
-            st.session_state.saving = choise(m["name"])
-        else:
-            st.session_state.saving = "Да"
-        st.session_state.saving_dict[m["name"]] = {"saving" : st.session_state.saving, "value" : value}
+        if "saving_dict" not in st.session_state: st.session_state.saving_dict = {}
 
-if st.button("Сохранить"):
-    with st.spinner("Сохраняю..."):
-        for key, data in st.session_state.saving_dict.items():
-            if data["saving"] == "Да":
-                upsert(con, date, usermap[user], key, data["value"])
-    st.toast("Данные сохранены! Хорошего дня:)", icon="✅")    
+        for m in metrics:
+            value = m["widget"](**m["args"]) # динамически собираем метрики, берём нужный виджет из словарей с метриками, затем через ** подставляем аргументы по именам
+            if st.session_state.get(f'{m["name"]}_flag'):
+                if "saving" not in st.session_state: st.session_state.saving = None
+                if already_exists(con, m["name"], date, usermap[user]):
+                    st.session_state.saving = choise(m["name"])
+                else:
+                    st.session_state.saving = "Да"
+                st.session_state.saving_dict[m["name"]] = {"saving" : st.session_state.saving, "value" : value}
+
+        if st.button("Сохранить"):
+            with st.spinner("Сохраняю..."):
+                for key, data in st.session_state.saving_dict.items():
+                    if data["saving"] == "Да":
+                        upsert(con, date, usermap[user], key, data["value"])
+            st.toast("Данные сохранены! Хорошего дня:)", icon="✅")    
+                
+    if st.session_state.page == "help":
+        st.markdown("""
+        Данные можно вносить в любое время суток за любой день.\n
+        Если за указанный день уже есть данные - скрипт предложит перезаписать или оставить.\n
+        При возникновении проблем или предложений по доработкам обращайтесь:\n
+        [VK] (https://vk.com/kayo_kayo1998)\n
+        [Telegram] (https://t.me/kayo_kayo1998)\n
+        [Email] (factorial65@gmail.com)\n
+                    """, unsafe_allow_html = True)   
