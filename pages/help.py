@@ -1,23 +1,67 @@
+import pandas as pd
+import psycopg2
+import os
 import streamlit as st
+import plotly.express as px
+import plotly.graph_objects as go
 
-st.set_page_config(page_title = "Помощь", layout = "wide")
+def get_key(key):
+    return st.secrets[key]
 
-# фон
-bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/IMG_20260316_114430_151.jpg"
 
-# дизайн
-st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background-image: url("{bg_image}");
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
+st.set_page_config(layout="wide")
+
+
+conn =  psycopg2.connect(
+    user = get_key("DB_USERNAME"),
+    password = get_key("DB_PASSWORD"),
+    host = get_key("DB_HOST"),
+    port = get_key("DB_PORT"),
+    dbname = get_key("DB_NAME")
+    )
+
+data_df = pd.read_sql("SELECT * FROM data_lake.streamlit_raw_data", conn)
+
+data_df['date'] = pd.to_datetime(data_df['date'])
+
+fig = go.Figure()
+
+fig.add_trace(
+    go.Scatter(
+        x = data_df["date"],
+        y = data_df["weight"],
+        name = "Вес",
+        mode = "lines",
+        yaxis = "y1"
+    )
 )
 
-st.write("Привет")
+fig.add_trace(
+    go.Scatter(
+        x = data_df["date"],
+        y = data_df["calories"],
+        name = "Калории",
+        mode = "lines",
+        yaxis = "y2"
+    )
+)
+
+fig.update_layout(
+    yaxis1 = dict(title = "Вес"),
+    yaxis2 = dict(
+        title = "Калории",
+        overlaying = "y",
+        side = "right"),
+    showlegend = False
+    )
+                  
+fig1 = px.bar(
+    data_df,
+    x = "date",
+    y = "mood",
+    title = "Настроение"
+)
+st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig1, use_container_width=True)
+
+#python -m streamlit run graphics.py
