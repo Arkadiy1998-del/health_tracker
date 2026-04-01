@@ -1,5 +1,7 @@
 import streamlit as st
 
+st.set_page_config(page_title = "Помощь", layout = "wide")
+
 # фон
 bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/main/Images/IMG_20260316_114430_151.jpg"
 
