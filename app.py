@@ -37,7 +37,7 @@ bg_image = "https://raw.githubusercontent.com/Arkadiy1998-del/health_tracker/mai
 #    unsafe_allow_html=True
 #)
 
-st.set_page_config(layout="wide")
+st.set_page_config(page_title="Главная", layout="wide")
 
 # Задаём функцию для создания словарей по метрикам
 def create_dict(metric_name, saving, metric):
