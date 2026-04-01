@@ -1,0 +1,17 @@
+1. Клонировать репозиторий
+  git clone https://github.com/Arkadiy1998-del/health_tracker.git
+  cd health_tracker
+
+2. Установить зависимости
+  pip install -r requirements.txt
+
+3. Настроить st.secrets для подключения к PostgreSQL
+  # .streamlit/secrets.toml
+  DB_USERNAME = "your_user"
+  DB_PASSWORD = "your_password"
+  DB_HOST = "host_address"
+  DB_PORT = "5432"
+  DB_NAME = "database_name"
+
+4. Запустить приложение
+  streamlit run app.py
