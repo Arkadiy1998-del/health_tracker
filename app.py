@@ -131,45 +131,31 @@ else:
     daytime = 'night'
     st.title("Доброй ночи!")
 
-col1, col2 = st.columns(2)
+con = connect()
+date = st.date_input("Выбор даты...", value = today, max_value=today)
+user = st.selectbox("Пользователь", ["Лена", "Вика"])
 
-if "page" not in st.session_state: st.session_state.page = None
+if "saving_dict" not in st.session_state: st.session_state.saving_dict = {}
 
-if st.session_state.page == None:
-    with col1:
-        if st.button("Внести данные"):
-            st.session_state.page = "metrics"
-        
-    with col2:
-        if st.button("Помощь"):
-            st.session_state.page = "help"       
-        
-    if st.session_state.page == "metrics":   
-        con = connect()
-        date = st.date_input("Выбор даты...", value = today, max_value=today)
-        user = st.selectbox("Пользователь", ["Лена", "Вика"])
+for m in metrics:
+    value = m["widget"](**m["args"]) # динамически собираем метрики, берём нужный виджет из словарей с метриками, затем через ** подставляем аргументы по именам
+    if st.session_state.get(f'{m["name"]}_flag'):
+        if "saving" not in st.session_state: st.session_state.saving = None
+        if already_exists(con, m["name"], date, usermap[user]):
+            st.session_state.saving = choise(m["name"])
+        else:
+            st.session_state.saving = "Да"
+        st.session_state.saving_dict[m["name"]] = {"saving" : st.session_state.saving, "value" : value}
 
-        if "saving_dict" not in st.session_state: st.session_state.saving_dict = {}
-
-        for m in metrics:
-            value = m["widget"](**m["args"]) # динамически собираем метрики, берём нужный виджет из словарей с метриками, затем через ** подставляем аргументы по именам
-            if st.session_state.get(f'{m["name"]}_flag'):
-                if "saving" not in st.session_state: st.session_state.saving = None
-                if already_exists(con, m["name"], date, usermap[user]):
-                    st.session_state.saving = choise(m["name"])
-                else:
-                    st.session_state.saving = "Да"
-                st.session_state.saving_dict[m["name"]] = {"saving" : st.session_state.saving, "value" : value}
-
-        if st.button("Сохранить"):
-            with st.spinner("Сохраняю..."):
-                for key, data in st.session_state.saving_dict.items():
-                    if data["saving"] == "Да":
-                        upsert(con, date, usermap[user], key, data["value"])
-            st.toast("Данные сохранены! Хорошего дня:)", icon="✅")    
+if st.button("Сохранить"):
+    with st.spinner("Сохраняю..."):
+        for key, data in st.session_state.saving_dict.items():
+            if data["saving"] == "Да":
+                upsert(con, date, usermap[user], key, data["value"])
+    st.toast("Данные сохранены! Хорошего дня:)", icon="✅")    
                 
-    if st.session_state.page == "help":
-        st.markdown("""
+
+st.markdown("""
         Данные можно вносить в любое время суток за любой день.\n
         Если за указанный день уже есть данные - скрипт предложит перезаписать или оставить.\n
         При возникновении проблем или предложений по доработкам обращайтесь:\n
