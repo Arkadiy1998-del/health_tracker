@@ -37,6 +37,10 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.sidebar.title("Меню")
+st.sidebar.write("Проба")
+
+
 # Задаём функцию для создания словарей по метрикам
 def create_dict(metric_name, saving, metric):
     if 'dict' not in st.session_state: st.session_state.dict = None
